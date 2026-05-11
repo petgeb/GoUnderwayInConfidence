@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GUIC – Hire a Skipper · Stockholm</title>
+  <meta name="description" content="Hyr en erfaren kapten för båttransport, privat segling och hamnassistans i Stockholm och hela landet." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d2b45;
+      --blue: #185FA5;
+      --blue-light: #e6f1fb;
+      --blue-mid: #b5d4f4;
+      --text: #0d2b45;
+      --text-muted: #4a6580;
+      --border: rgba(13,43,69,0.12);
+      --bg: #f7f5f0;
+      --white: #ffffff;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,245,240,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .logo {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+    }
+    .logo em { color: var(--blue); font-style: normal; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--navy); }
+
+    /* HERO */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+    }
+    .hero-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hero-cta:hover { background: var(--blue); }
+
+    /* HERO IMAGE PLACEHOLDER */
+    .hero-image {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      /* Ta bort denna div och lägg till en riktig bild:
+         <img src="images/hero.jpg" alt="Kapten i cockpit" /> */
+    }
+    .hero-image-placeholder {
+      width: 100%;
+      height: 320px;
+      background: var(--blue-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--blue);
+      border: 1px dashed var(--blue-mid);
+      /* CLAUDE CODE: ersätt denna div med <img src="images/hero.jpg" alt="..."> */
+    }
+
+    /* SECTION WRAPPER */
+    section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.5rem;
+    }
+    section h2 {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .service-card h3 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .service-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* CERTS */
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .cert-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cert-row:last-child { border-bottom: none; }
+    .cert-tag {
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cert-row strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+    .cert-row p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* CONTACT FORM */
+    .contact-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.65;
+    }
+    form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .form-row { margin-bottom: 12px; }
+    .form-row:last-child { margin-bottom: 0; }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 9px 12px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    .submit-btn {
+      width: 100%;
+      background: var(--navy);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      border-radius: 4px;
+      padding: 12px;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: var(--blue); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* MOBILE */
+    @media (max-width: 540px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">G<em>U</em>IC</div>
+    <div class="nav-links">
+      <a href="#tjanster">Tjänster</a>
+      <a href="#certifikat">Certifikat</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-label">Hire a Skipper · Stockholm</p>
+    <h1>Behöver du hjälp med att flytta din båt?</h1>
+    <p>
+      Hyr en erfaren kapten för en smidig och säker flytt och transport av din båt.
+      Vi erbjuder skräddarsydda lösningar som passar dina behov – oavsett om du är
+      privatperson, båtmäklare eller företag.
+    </p>
+    <a href="#kontakt" class="hero-cta">Begär offert</a>
+  </div>
+
+  <!-- BILDSEKTION: ersätt placeholder med <img src="images/hero.jpg" alt="Kapten"> -->
+  <div class="hero-image">
+    <div class="hero-image-placeholder">
+      📷 Lägg till din bild här – images/hero.jpg
+    </div>
+  </div>
+
+  <section id="tjanster">
+    <p class="section-label">Vad vi erbjuder</p>
+    <h2>Tjänster</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Båttransport</h3>
+        <p>Flytt av din båt till och från Stockholm – säkert och professionellt utfört längs hela kusten.</p>
+      </div>
+      <div class="service-card">
+        <h3>Privat kapten</h3>
+        <p>Hyr en kapten till din båt för dag, kväll eller längre uppdrag i Stockholms skärgård.</p>
+      </div>
+      <div class="service-card">
+        <h3>Persontransport</h3>
+        <p>Diskret och professionell transport av passagerare på Mälaren och i Stockholms inlopp.</p>
+      </div>
+      <div class="service-card">
+        <h3>Företagsevent</h3>
+        <p>Professionell förare till representationsbåten – för konferenser, mingel och kundmöten till sjöss.</p>
+      </div>
+      <div class="service-card">
+        <h3>Hamnassistans</h3>
+        <p>Hjälp med att lägga till, flytta eller hämta din båt i hamn på ett tryggt och säkert sätt.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifikat">
+    <p class="section-label">Kompetens</p>
+    <h2>Certifikat &amp; behörigheter</h2>
+    <div class="cert-list">
+      <div class="cert-row">
+        <span class="cert-tag">Kustskepparintyg</span>
+        <div>
+          <strong>Kustskepparintyg</strong>
+          <p>Behörighet för sjöfart i kustvatten och skärgård.</p>
+        </div>
+      </div>
+      <div class="cert-row">
+        <span class="cert-tag">Mekanik</span>
+        <div>
+          <strong>Båtmekanikerintyg</strong>
+          <p>Kompetens för underhåll och felsökning av båtmotorer och tekniska system ombord.</p>
+        </div>
+      </div>
+      <div class="cert-row">
+        <span class="cert-tag">Befäl klass 8</span>
+        <div>
+          <strong>Fartygsbefäl- och maskinbefäl klass 8</strong>
+          <p>Officiell behörighet som befälhavare och maskinist på fartyg i inre fart.</p>
+        </div>
+      </div>
+      <div class="cert-row">
+        <span class="cert-tag">Snabba fartyg</span>
+        <div>
+          <strong>Handhavande av snabba fartyg</strong>
+          <p>Utbildning i säker framföring av snabba och höghastighetsfartyg, inklusive RIB.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <p class="section-label">Kom i kontakt</p>
+    <h2>Begär offert</h2>
+    <p class="contact-desc">
+      Beskriv ditt uppdrag så återkommer vi med ett förslag anpassat för din båt och dina behov.
+      Kontakta oss via formuläret eller direkt på
+      <a href="mailto:info@guic.se" style="color: var(--blue);">info@guic.se</a>.
+    </p>
+    <!--
+      FORMSPREE: Skapa ett konto på formspree.io och ersätt YOUR_FORM_ID nedan.
+      action="https://formspree.io/f/YOUR_FORM_ID"
+    -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="name">Namn</label>
+          <input type="text" id="name" name="name" placeholder="Ditt namn" required />
+        </div>
+        <div class="form-row">
+          <label for="email">E-post</label>
+          <input type="email" id="email" name="email" placeholder="din@mejl.se" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="phone">Telefon (valfritt)</label>
+        <input type="tel" id="phone" name="phone" placeholder="+46 70 000 00 00" />
+      </div>
+      <div class="form-row">
+        <label for="service">Tjänst</label>
+        <select id="service" name="service">
+          <option>Båttransport / flytt</option>
+          <option>Privat kapten</option>
+          <option>Persontransport</option>
+          <option>Företagsevent</option>
+          <option>Hamnassistans</option>
+          <option>Annat</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="message">Beskriv uppdraget</label>
+        <textarea id="message" name="message" placeholder="Berätta om din båt, uppdragets startpunkt, destination och önskat datum..." required></textarea>
+      </div>
+      <div class="form-row">
+        <button type="submit" class="submit-btn">Skicka förfrågan</button>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    GUIC &nbsp;·&nbsp; Stockholm &nbsp;·&nbsp;
+    <a href="mailto:info@guic.se" style="color: var(--blue-mid);">info@guic.se</a>
+  </footer>
+
+</body>
+</html>
